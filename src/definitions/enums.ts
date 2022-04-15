@@ -37,7 +37,7 @@ export enum TEXT_STYLES {
   CODE = "CODE",
 }
 
-export declare enum ROTATE {
+export enum ROTATE {
   NINETY = "rotate(90deg)",
   ONEEIGHTY = "rotate(180deg)",
   TWOSEVENTY = "rotate(270deg)",

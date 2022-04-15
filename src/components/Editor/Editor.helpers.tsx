@@ -411,24 +411,4 @@ export const onSuccessOfImageUpload = (
     key: imageUrl?.split("/")?.[2],
   });
   return AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, " ");
-
-  // // all of this extra logic is done simply to remove the extra empty block that is prepending when adding an atomic block in draft.js
-  // const newContentState = atomicBlock.getCurrentContent();
-  // const blockMap = newContentState.getBlockMap();
-
-  // const currentBlockMap = blockMap.find(
-  //   (block) => block?.getEntityAt(0) === entityKey
-  // );
-
-  // const atomicBlockKey = currentBlockMap.getKey();
-
-  // const blockBefore = newContentState?.getBlockBefore(atomicBlockKey)?.getKey();
-
-  // const newBlockMap = blockMap.filter((block) =>
-  //   Boolean(block && block.getKey() !== blockBefore)
-  // );
-
-  // return EditorState.createWithContent(
-  //   contentState.set("blockMap", newBlockMap) as ContentState
-  // );
 };

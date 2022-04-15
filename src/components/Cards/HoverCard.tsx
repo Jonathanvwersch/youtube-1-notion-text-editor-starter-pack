@@ -32,7 +32,7 @@ const HoverCard: React.FC<HoverCardProps> = ({ children, ...props }) => {
 
   // Used to allow up and down movement using your arrows keys on hover cards, such as those found in a modal
   // To use, two variables are needed. Firstly, the index of the hover card (obtained from the array map prototype).
-  // And secondly the active index of the arrow keys. See ScrollerModal to see implementation. Fakefocus prop triggers,
+  // And secondly the active index of the arrow keys. See ScrollerModal to see implementation. Fakefocus prop triggers
   // active state of block (so it looks like it is being hovered over) but it doesn't actually have focus. This is useful for the notetaking
   // block modal, as we want to maintain focus on your notes, but also have a 'fake focus' on the modal
   useEffect(() => {
@@ -97,25 +97,21 @@ const StyledHoverCard = styled.button<HoverCardProps & { active?: boolean }>`
   outline: none;
   border: none;
   padding: ${({ padding }) => padding};
-  background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor ? backgroundColor : theme.colors.secondary};
+  background-color: ${({ backgroundColor }) => backgroundColor || "FAFAFA"};
   border-radius: ${({ borderRadius }) => borderRadius};
   user-select: none;
   &:focus-visible,
   &:hover {
-    filter: ${({ theme, turnOffHover }) =>
-      !turnOffHover && theme.colors.hover.filter};
+    filter: brightness(92%);
   }
   &:active {
-    background-color: ${({ turnOffHover }) => !turnOffHover && "transparent"};
+    background-color: transparent;
   }
   &.active {
-    filter: ${({ theme, turnOffHover }) =>
-      !turnOffHover && theme.colors.hover.filter};
+    filter: brightness(90%);
   }
-  filter: ${({ theme, turnOffHover, active }) =>
-    !turnOffHover && active && theme.colors.hover.filter};
-  cursor: ${({ turnOffHover }) => (turnOffHover ? "default" : "pointer")};
+  filter: ${({ active }) => (active ? "brightness(92%)" : undefined)};
+  cursor: pointer;
 `;
 
 export default React.memo(HoverCard);

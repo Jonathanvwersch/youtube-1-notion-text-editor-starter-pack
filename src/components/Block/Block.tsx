@@ -38,7 +38,7 @@ const Block: React.FC<BlockProps> = ({
       backgroundColor={backgroundColor || "white"}
       handleMouseDown={handleMouseDown}
       handleClick={handleClick}
-      padding={"8px 16px"}
+      padding={"8px"}
       className={className}
       fakeFocus={fakeFocus}
     >
@@ -68,6 +68,7 @@ const Paragraph = styled.p`
   font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: 0px;
   white-space: nowrap;
 `;
 

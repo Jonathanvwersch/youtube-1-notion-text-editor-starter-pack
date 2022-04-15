@@ -7,6 +7,7 @@ const App = () => {
     <StyledApp>
       <Wrapper>
         <Page>
+          <h1>Notion-like Text Editor</h1>
           <RichEditor />
         </Page>
       </Wrapper>

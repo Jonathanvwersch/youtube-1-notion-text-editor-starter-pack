@@ -1,4 +1,4 @@
-import Draft, {
+import {
   ContentBlock,
   DraftEditorCommand,
   EditorState,
@@ -12,12 +12,14 @@ import "draft-js/dist/Draft.css";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { BLOCK_TYPES } from "../../definitions";
+import EditorBlockModal from "../EditorBlockModal/EditorBlockModal";
 import GeneralBlock from "../NotetakingBlocks/GeneralBlock/GeneralBlock";
 import { styleMap } from "./Editor.data";
 import {
   addNewBlockAt,
   getCurrentBlock,
   isSoftNewlineEvent,
+  myBlockStyleFn,
   removeCharacters,
 } from "./Editor.helpers";
 
@@ -102,7 +104,6 @@ const RichEditor: React.FC<RichEditorProps> = () => {
   const onTab = (event: React.KeyboardEvent<{}>) => {
     setEditorState && setEditorState(RichUtils.onTab(event, editorState, 4));
   };
-
   return (
     <EditorContainer>
       <Editor
@@ -113,15 +114,16 @@ const RichEditor: React.FC<RichEditorProps> = () => {
         spellCheck={true}
         blockRendererFn={myBlockRenderer}
         handleReturn={handleReturn}
+        blockStyleFn={myBlockStyleFn}
         customStyleMap={styleMap}
         placeholder="Just start writing"
       />
-      {/* <NotetakingBlocksModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          onToggle={toggleBlockType}
-          editorState={editorState}
-        /> */}
+      <EditorBlockModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onToggle={toggleBlockType}
+        editorState={editorState}
+      />
     </EditorContainer>
   );
 };
@@ -174,6 +176,7 @@ const EditorContainer = styled.div`
     margin-bottom: 20px;
     background-color: #fafafa;
     border-radius: 6px;
+    margin-left: 0px;
     font-size: 16px;
     padding: 16px;
     font-family: "Courier Prime", monospace;

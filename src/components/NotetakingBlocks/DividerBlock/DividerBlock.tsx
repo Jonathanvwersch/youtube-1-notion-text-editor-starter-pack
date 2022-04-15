@@ -33,8 +33,7 @@ const DividerBlock: React.FC = (props: any) => {
 export default memo(DividerBlock);
 
 const Divider = styled.hr`
-  color: ${({ theme }) => theme.colors.fontColor};
-  background-color: ${({ theme }) => theme.colors.fontColor};
+  background-color: #2c2c31;
   margin-top: 10px;
   margin-bottom: 10px;
   border: none;

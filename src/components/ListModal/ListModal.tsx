@@ -1,10 +1,9 @@
-import React, { Fragment, useContext } from "react";
-import styled, { ThemeContext } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import { Block, Overlay } from "..";
 import { CoordsType, ScrollerModalData } from "../../definitions";
 import { useKeyDownAndUpListener } from "../../hooks";
 import ShadowCard from "../Cards/ShadowCard";
-import Divider from "../Styled/Styled";
 
 type ScrollerModalProps = {
   open: boolean;
@@ -30,8 +29,6 @@ const ScrollerModal: React.FC<ScrollerModalProps> = ({
   fakeFocus,
   preventDefault,
 }) => {
-  const theme = useContext(ThemeContext);
-
   const { activeIndex } = useKeyDownAndUpListener(
     open,
     data.length,
@@ -43,24 +40,23 @@ const ScrollerModal: React.FC<ScrollerModalProps> = ({
       <StyledScrollerModal
         fullHeight={fullHeight}
         coords={coords}
-        width={theme.sizes.modal.small}
+        width="220px"
         cardRef={cardRef}
       >
         {data.map((item, index) => (
-          <Fragment key={item.label}>
-            <Block
-              index={index}
-              activeIndex={activeIndex}
-              icon={item?.icon}
-              fakeFocus={fakeFocus}
-              turnOffHover={item?.turnOffHover}
-              handleClick={() => {
-                handleClose();
-                clickFunctions(item?.value);
-              }}
-            />
-            <Divider />
-          </Fragment>
+          <Block
+            index={index}
+            key={item.label}
+            activeIndex={activeIndex}
+            icon={item?.icon}
+            text={item.label}
+            fakeFocus={fakeFocus}
+            turnOffHover={item?.turnOffHover}
+            handleClick={() => {
+              handleClose();
+              clickFunctions(item?.value);
+            }}
+          />
         ))}
       </StyledScrollerModal>
     </Overlay>
@@ -79,4 +75,4 @@ const StyledScrollerModal = styled(ShadowCard)<{
   }
 `;
 
-export default React.memo(ScrollerModal);
+export default ScrollerModal;
