@@ -23,13 +23,16 @@ import {
   removeCharacters,
 } from "./Editor.helpers";
 
-type RichEditorProps = {};
+type RichEditorProps = {
+  editorState: EditorState;
+  setEditorState: React.Dispatch<React.SetStateAction<EditorState>>;
+};
 
-const RichEditor: React.FC<RichEditorProps> = () => {
+const RichEditor: React.FC<RichEditorProps> = ({
+  editorState,
+  setEditorState,
+}) => {
   const [dragBlockKey, setDragBlockKey] = useState<string | undefined>();
-  const [editorState, setEditorState] = useState<EditorState>(
-    EditorState.createEmpty()
-  );
   const currentBlock = getCurrentBlock(editorState);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -168,6 +171,7 @@ const EditorContainer = styled.div`
     border-left: 2px solid black;
     font-style: italic;
     font-size: 18px;
+    margin-left: 0px;
     padding-left: 16px;
   }
 

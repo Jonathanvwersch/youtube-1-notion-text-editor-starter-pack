@@ -1,5 +1,5 @@
 import React from "react";
-import { BLOCK_TYPES, ROTATE, ScrollerModalData } from "../../definitions";
+import { BLOCK_TYPES, ROTATE, ListModalData } from "../../definitions";
 import {
   BulletedListIcon,
   CloseIcon,
@@ -13,7 +13,7 @@ import {
 } from "../../icons";
 import BodyTextIcon from "../../icons/BodyTextIcon";
 
-export const blockData: ScrollerModalData = [
+export const blockData: ListModalData = [
   {
     label: "Body",
     value: BLOCK_TYPES.UNSTYLED,
@@ -61,6 +61,18 @@ export const blockData: ScrollerModalData = [
   },
 ];
 
+export const ConvertToBlockData: ListModalData = [...blockData];
+
+export const NoteTakingBlocksData: ListModalData = [
+  ...blockData,
+
+  {
+    label: "Divider",
+    value: BLOCK_TYPES.DIVIDER,
+    icon: <DividerIcon rotate={ROTATE.NINETY} strokeWidth="1px" />,
+  },
+];
+
 export const getSelectedBlockNode = (root: any) => {
   const selection = root.getSelection();
   if (selection.rangeCount === 0) {
@@ -76,7 +88,7 @@ export const getSelectedBlockNode = (root: any) => {
   return null;
 };
 
-export const noMatchingBlocksData: ScrollerModalData = [
+export const noMatchingBlocksData: ListModalData = [
   {
     label: "No matching blocks",
     icon: <CloseIcon />,

@@ -7,7 +7,7 @@ export type CoordsType = {
   left?: number;
 };
 
-export type ScrollerModalData = {
+export type ListModalData = {
   label: any;
   value: any;
   icon?: React.ReactNode;

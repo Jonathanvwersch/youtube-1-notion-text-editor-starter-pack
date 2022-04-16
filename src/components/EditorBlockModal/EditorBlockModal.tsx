@@ -1,15 +1,15 @@
 import { EditorState } from "draft-js";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { ListModal } from "..";
-import { BLOCK_TYPES, CoordsType, ScrollerModalData } from "../../definitions";
+import { BLOCK_TYPES, CoordsType, ListModalData } from "../../definitions";
 import {
   getCurrentBlock,
   positionBlockEditorModal,
 } from "../Editor/Editor.helpers";
 import {
-  blockData,
   getSelectedBlockNode,
   noMatchingBlocksData,
+  NoteTakingBlocksData,
 } from "./EditorBlockModal.helpers";
 
 type NotetakingBlocksModalProps = {
@@ -26,7 +26,7 @@ const NotetakingBlocksModal: React.FC<NotetakingBlocksModalProps> = ({
   setIsOpen,
 }) => {
   const [currentTextLength, setCurrentTextLength] = useState<number>(0);
-  const [data, setData] = useState<ScrollerModalData>(blockData);
+  const [data, setData] = useState<ListModalData>(NoteTakingBlocksData);
   const [coords, setCoords] = useState<CoordsType>();
   const currentBlock = getCurrentBlock(editorState);
   const currentText = currentBlock?.getText().slice(1).toLowerCase();
@@ -74,7 +74,7 @@ const NotetakingBlocksModal: React.FC<NotetakingBlocksModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       // Filter data of modal based on what user types
-      let filteredData = blockData?.filter((item) =>
+      let filteredData = NoteTakingBlocksData?.filter((item) =>
         item.label.includes(currentText)
       );
 

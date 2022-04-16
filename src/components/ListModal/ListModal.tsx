@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Block, Overlay } from "..";
-import { CoordsType, ScrollerModalData } from "../../definitions";
+import { CoordsType, ListModalData } from "../../definitions";
 import { useKeyDownAndUpListener } from "../../hooks";
 import ShadowCard from "../Cards/ShadowCard";
 
@@ -9,7 +9,7 @@ type ScrollerModalProps = {
   open: boolean;
   handleClose: () => void;
   clickFunctions: (args?: any) => void;
-  data: ScrollerModalData;
+  data: ListModalData;
   coords?: CoordsType;
   cardRef?: React.RefObject<HTMLDivElement>;
   fullHeight?: boolean;

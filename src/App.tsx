@@ -1,14 +1,25 @@
-import React from "react";
+import { EditorState } from "draft-js";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { RichEditor } from "./components";
+import { RichEditor, Toolbar } from "./components";
 
 const App = () => {
+  const [editorState, setEditorState] = useState<EditorState>(
+    EditorState.createEmpty()
+  );
+
   return (
     <StyledApp>
       <Wrapper>
         <Page>
-          <h1>Notion-like Text Editor</h1>
-          <RichEditor />
+          <Toolbar editorState={editorState} setEditorState={setEditorState} />
+          <h1 style={{ marginTop: "32px", userSelect: "none" }}>
+            Notion-like Text Editor
+          </h1>
+          <RichEditor
+            editorState={editorState}
+            setEditorState={setEditorState}
+          />
         </Page>
       </Wrapper>
     </StyledApp>

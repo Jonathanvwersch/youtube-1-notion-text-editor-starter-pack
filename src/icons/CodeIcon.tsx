@@ -4,6 +4,7 @@ import { IconType } from "../definitions";
 
 const CodeIcon: React.FC<IconType> = ({ color, size }) => {
   const iconColor = color ?? "#2C2C31";
+
   return (
     <Svg size={size} viewBox="0 0 16 16" fill="none">
       <g clipPath="url(#clip0)">
