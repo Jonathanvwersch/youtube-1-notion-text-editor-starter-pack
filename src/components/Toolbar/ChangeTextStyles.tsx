@@ -85,7 +85,7 @@ const ChangeTextStyles: React.FC<ChangeTextStyleProps> = ({
 
       {changeTextStylesData.map((textStyleData) => (
         <div
-          key={textStyleData.id}
+          key={textStyleData.label}
           onMouseDown={(e) => {
             e.preventDefault();
             e.stopPropagation();

@@ -34,6 +34,8 @@ const RichEditor: React.FC<RichEditorProps> = ({
 }) => {
   const [dragBlockKey, setDragBlockKey] = useState<string | undefined>();
   const currentBlock = getCurrentBlock(editorState);
+  const blockType = currentBlock?.getType();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleKeyCommand = (
@@ -84,13 +86,10 @@ const RichEditor: React.FC<RichEditorProps> = ({
         setEditorState(RichUtils.insertSoftNewline(editorState));
       return "handled";
     }
-    const currentBlock = getCurrentBlock(editorState);
-    const blockType = currentBlock?.getType();
     if (
       blockType === "unstyled" ||
       blockType === "unordered-list-item" ||
-      blockType === "ordered-list-item" ||
-      blockType === "to-do"
+      blockType === "ordered-list-item"
     ) {
       return "not-handled";
     }
@@ -107,6 +106,7 @@ const RichEditor: React.FC<RichEditorProps> = ({
   const onTab = (event: React.KeyboardEvent<{}>) => {
     setEditorState && setEditorState(RichUtils.onTab(event, editorState, 4));
   };
+
   return (
     <EditorContainer>
       <Editor
@@ -119,7 +119,7 @@ const RichEditor: React.FC<RichEditorProps> = ({
         handleReturn={handleReturn}
         blockStyleFn={myBlockStyleFn}
         customStyleMap={styleMap}
-        placeholder="Just start writing"
+        placeholder={blockType === "unstyled" ? "Just start writing" : ""}
       />
       <EditorBlockModal
         isOpen={isOpen}

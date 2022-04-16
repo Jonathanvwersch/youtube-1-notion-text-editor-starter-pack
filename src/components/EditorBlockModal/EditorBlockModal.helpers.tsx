@@ -54,11 +54,6 @@ export const blockData: ListModalData = [
     value: BLOCK_TYPES.CODE,
     icon: <CodeIcon />,
   },
-  {
-    label: "Divider",
-    value: BLOCK_TYPES.DIVIDER,
-    icon: <DividerIcon rotate={ROTATE.NINETY} strokeWidth="1px" />,
-  },
 ];
 
 export const ConvertToBlockData: ListModalData = [...blockData];

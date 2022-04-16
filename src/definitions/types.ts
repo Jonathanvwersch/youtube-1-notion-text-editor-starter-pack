@@ -22,6 +22,10 @@ export type IconType = {
   size?: string;
   rotate?: ROTATE;
   height?: string;
+  viewBox?: string;
+  shouldFill?: boolean;
+  shouldStroke?: boolean;
+  fill?: string;
   scale?: string;
   width?: string;
   ariaLabel?: string;
