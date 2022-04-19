@@ -64,8 +64,7 @@ export const removeSpecificBlockStyle = (
   if (removeAll) {
     blockStyles = [...Object.keys(TEXT_STYLES)];
   }
-  const contentWithoutStyles = reduce(
-    blockStyles,
+  const contentWithoutStyles = blockStyles?.reduce(
     (newContentState, blockStyle) =>
       Modifier.removeInlineStyle(
         newContentState,
@@ -75,11 +74,13 @@ export const removeSpecificBlockStyle = (
     editorState.getCurrentContent()
   );
 
-  return EditorState.push(
-    editorState,
-    contentWithoutStyles,
-    "change-inline-style"
-  );
+  if (contentWithoutStyles) {
+    return EditorState.push(
+      editorState,
+      contentWithoutStyles,
+      "change-inline-style"
+    );
+  }
 };
 
 // Function used to add new block after a specified block (using block key to identify the block)
