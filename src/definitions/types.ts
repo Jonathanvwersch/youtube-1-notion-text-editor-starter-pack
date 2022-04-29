@@ -8,8 +8,9 @@ export type CoordsType = {
 };
 
 export type ListModalData = {
-  label: any;
+  label: string;
   value: any;
+  description?: string;
   icon?: React.ReactNode;
   style?: string;
   divider?: boolean;

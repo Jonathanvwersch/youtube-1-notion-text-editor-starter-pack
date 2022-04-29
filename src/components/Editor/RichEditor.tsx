@@ -119,7 +119,7 @@ const RichEditor: React.FC<RichEditorProps> = ({
         handleReturn={handleReturn}
         blockStyleFn={myBlockStyleFn}
         customStyleMap={styleMap}
-        placeholder={blockType === "unstyled" ? "Just start writing" : ""}
+        placeholder={blockType === "unstyled" ? "Type '/' for commands" : ""}
       />
       <EditorBlockModal
         isOpen={isOpen}

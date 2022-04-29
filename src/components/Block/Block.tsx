@@ -13,8 +13,8 @@ type BlockProps = {
   className?: string;
   turnOffHover?: boolean;
   fakeFocus?: boolean;
-  text?: string;
-  extraText?: string;
+  topText?: string;
+  bottomText?: string;
 };
 
 const Block: React.FC<BlockProps> = ({
@@ -27,8 +27,8 @@ const Block: React.FC<BlockProps> = ({
   className,
   turnOffHover = false,
   fakeFocus,
-  text,
-  extraText,
+  topText,
+  bottomText,
 }) => {
   return (
     <HoverCard
@@ -38,31 +38,35 @@ const Block: React.FC<BlockProps> = ({
       backgroundColor={backgroundColor || "white"}
       handleMouseDown={handleMouseDown}
       handleClick={handleClick}
-      padding={"8px"}
+      padding="8px"
+      borderRadius="6px"
       className={className}
       fakeFocus={fakeFocus}
     >
-      <Flex justifyContent="space-between" width="100%">
-        <Flex style={{ overflow: "hidden" }}>
-          <Flex alignItems="center" mr="8px">
-            {icon}
-          </Flex>
-          <Paragraph className="overflow">{text}</Paragraph>
-        </Flex>
-        {extraText && (
-          <Flex
-            pl="8px"
-            style={{
-              fontSize: "14px",
-            }}
-          >
-            {extraText}
-          </Flex>
-        )}
+      <Flex width="100%" alignItems="center">
+        <Flex mr="16px">{icon}</Flex>
+        <TextWrapper>
+          <Paragraph className="overflow">{topText}</Paragraph>
+          {bottomText && (
+            <Paragraph
+              style={{ color: "rgba(55, 53, 47, 0.65)" }}
+              className="overflow"
+            >
+              {bottomText}
+            </Paragraph>
+          )}
+        </TextWrapper>
       </Flex>
     </HoverCard>
   );
 };
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 4px;
+`;
 
 const Paragraph = styled.p`
   font-size: 14px;
@@ -70,6 +74,7 @@ const Paragraph = styled.p`
   overflow: hidden;
   margin: 0px;
   white-space: nowrap;
+  color: rgb(55, 53, 47); ;
 `;
 
 export default Block;

@@ -1,41 +1,33 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
-const useKeyDownAndUpListener = (
-  shouldRun: boolean = true,
-  length: number,
-  preventDefault?: boolean
-) => {
+const useKeyDownAndUpListener = (shouldRun: boolean = true, length: number) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const eventHandler = (event: KeyboardEvent) => {
+  useLayoutEffect(() => {
     if (shouldRun) {
-      if (event.key === "ArrowUp") {
-        preventDefault && event.preventDefault();
-        setActiveIndex((activeIndex - 1 + length) % length);
-      } else if (event.key === "ArrowDown") {
-        preventDefault && event.preventDefault();
-        setActiveIndex((activeIndex + 1) % length);
-      }
+      setActiveIndex(0);
     }
-  };
-
-  useEffect(() => {
-    if (!shouldRun) {
-      setActiveIndex(-1);
-    }
-    setActiveIndex(0);
   }, [shouldRun]);
 
-  useEffect(() => {
-    if (activeIndex > length - 1) {
-      setActiveIndex(-1);
-    }
-  }, [length, activeIndex]);
+  const eventHandler = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "ArrowUp") {
+        setActiveIndex((activeIndex - 1 + length) % length);
+        event.preventDefault();
+      } else if (event.key === "ArrowDown") {
+        setActiveIndex((activeIndex + 1) % length);
+        event.preventDefault();
+      }
+    },
+    [activeIndex]
+  );
 
   useEffect(() => {
-    window.addEventListener("keydown", eventHandler);
-    return () => window.removeEventListener("keydown", eventHandler);
-  }, [shouldRun, activeIndex, length]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (shouldRun) {
+      window.addEventListener("keydown", eventHandler);
+      return () => window.removeEventListener("keydown", eventHandler);
+    }
+  }, [eventHandler, shouldRun]);
 
   return { activeIndex };
 };

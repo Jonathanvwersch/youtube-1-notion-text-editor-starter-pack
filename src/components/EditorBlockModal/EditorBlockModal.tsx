@@ -75,7 +75,10 @@ const NotetakingBlocksModal: React.FC<NotetakingBlocksModalProps> = ({
     if (isOpen) {
       // Filter data of modal based on what user types
       let filteredData = NoteTakingBlocksData?.filter((item) =>
-        item.label.includes(currentText)
+        item.label
+          .replaceAll(" ", "")
+          .toLowerCase()
+          .includes(currentText.replaceAll(" ", "").toLowerCase())
       );
 
       // Show special 'no results block' in modal,
@@ -111,7 +114,6 @@ const NotetakingBlocksModal: React.FC<NotetakingBlocksModalProps> = ({
       clickFunctions={toggleBlockStyle}
       data={data}
       fakeFocus
-      preventDefault
     />
   );
 };

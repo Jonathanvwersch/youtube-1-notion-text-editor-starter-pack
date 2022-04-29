@@ -5,7 +5,7 @@ import React, {
   useLayoutEffect,
   useRef,
 } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type HoverCardProps = {
   children?: ReactNode;
@@ -71,13 +71,14 @@ const HoverCard: React.FC<HoverCardProps> = ({ children, ...props }) => {
         e.preventDefault();
         props.handleMouseDown && props.handleMouseDown();
       }}
+      as={props.turnOffHover ? "div" : "button"}
       onClick={(e: SyntheticEvent) => {
-        if (props.handleClick) {
+        if (props.handleClick && !props.turnOffHover) {
           e.preventDefault();
           props.handleClick();
         }
       }}
-      turnOffHover={false}
+      turnOffHover={props.turnOffHover}
       {...props}
       active={
         props.fakeFocus &&
@@ -91,15 +92,7 @@ const HoverCard: React.FC<HoverCardProps> = ({ children, ...props }) => {
   );
 };
 
-const StyledHoverCard = styled.button<HoverCardProps & { active?: boolean }>`
-  width: ${({ width }) => (width ? width : "100%")};
-  height: ${({ height }) => height && height};
-  outline: none;
-  border: none;
-  padding: ${({ padding }) => padding};
-  background-color: ${({ backgroundColor }) => backgroundColor || "FAFAFA"};
-  border-radius: ${({ borderRadius }) => borderRadius};
-  user-select: none;
+const HoverStyles = css`
   &:focus-visible,
   &:hover {
     filter: brightness(92%);
@@ -110,8 +103,24 @@ const StyledHoverCard = styled.button<HoverCardProps & { active?: boolean }>`
   &.active {
     filter: brightness(90%);
   }
-  filter: ${({ active }) => (active ? "brightness(92%)" : undefined)};
   cursor: pointer;
+`;
+
+const StyledHoverCard = styled.button<HoverCardProps & { active?: boolean }>`
+  width: ${({ width, turnOffHover }) =>
+    turnOffHover ? "auto" : width ? width : "100%"};
+  height: ${({ height }) => height && height};
+  outline: none;
+  border: none;
+  padding: ${({ padding }) => padding};
+  background-color: ${({ backgroundColor }) => backgroundColor || "FAFAFA"};
+  border-radius: ${({ borderRadius }) => borderRadius};
+  user-select: none;
+
+  ${({ turnOffHover }) => !turnOffHover && HoverStyles};
+
+  filter: ${({ turnOffHover, active }) =>
+    !turnOffHover && active ? "brightness(92%)" : undefined};
 `;
 
 export default React.memo(HoverCard);

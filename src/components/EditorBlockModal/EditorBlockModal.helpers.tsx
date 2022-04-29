@@ -15,44 +15,52 @@ import BodyTextIcon from "../../icons/BodyTextIcon";
 
 export const blockData: ListModalData = [
   {
-    label: "Body",
+    label: "Text",
     value: BLOCK_TYPES.UNSTYLED,
-    icon: <BodyTextIcon />,
+    icon: <BodyTextIcon size="24px" />,
+    description: "Just start writing with plain text",
   },
   {
-    label: "Large heading",
+    label: "Heading 1",
     value: BLOCK_TYPES.HEADER_ONE,
-    icon: <H1Icon />,
+    icon: <H1Icon size="24px" />,
+    description: "Big section heading",
   },
   {
-    label: "Medium heading",
+    label: "Heading 2",
     value: BLOCK_TYPES.HEADER_TWO,
-    icon: <H2Icon />,
+    icon: <H2Icon size="24px" />,
+    description: "Medium section heading",
   },
   {
-    label: "Small heading",
+    label: "Heading 3",
     value: BLOCK_TYPES.HEADER_THREE,
-    icon: <H3Icon />,
+    icon: <H3Icon size="24px" />,
+    description: "Small section heading",
   },
   {
     label: "Bulleted list",
     value: BLOCK_TYPES.BULLETED_LIST,
-    icon: <BulletedListIcon />,
+    icon: <BulletedListIcon size="24px" />,
+    description: "Create a simple bulleted list",
   },
   {
     label: "Numbered list",
     value: BLOCK_TYPES.NUMBERED_LIST,
-    icon: <NumberedListIcon />,
+    icon: <NumberedListIcon size="24px" />,
+    description: "Create a list with numbering",
   },
   {
     label: "Quote",
     value: BLOCK_TYPES.QUOTE,
-    icon: <QuoteIcon />,
+    icon: <QuoteIcon size="24px" />,
+    description: "Capture a quote",
   },
   {
     label: "Code",
     value: BLOCK_TYPES.CODE,
-    icon: <CodeIcon />,
+    icon: <CodeIcon size="24px" />,
+    description: " Capture a code snippet",
   },
 ];
 
@@ -64,7 +72,7 @@ export const NoteTakingBlocksData: ListModalData = [
   {
     label: "Divider",
     value: BLOCK_TYPES.DIVIDER,
-    icon: <DividerIcon rotate={ROTATE.NINETY} strokeWidth="1px" />,
+    icon: <DividerIcon size="24px" rotate={ROTATE.NINETY} strokeWidth="1px" />,
   },
 ];
 
@@ -85,8 +93,8 @@ export const getSelectedBlockNode = (root: any) => {
 
 export const noMatchingBlocksData: ListModalData = [
   {
-    label: "No matching blocks",
-    icon: <CloseIcon />,
+    label: "No results",
+    icon: <CloseIcon size="24px" />,
     value: "",
     turnOffHover: true,
   },

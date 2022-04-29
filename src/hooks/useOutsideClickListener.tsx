@@ -22,25 +22,27 @@ const useOutsideClickListener = (
     if (shouldRun) {
       window.addEventListener("mousedown", handleClickOutside);
       return () => window.removeEventListener("mousedown", handleClickOutside);
-    } else window.removeEventListener("mousedown", handleClickOutside);
-    return () => {};
+    }
   }, [shouldRun, handleClickOutside]);
 
-  const handleEscape = useCallback(
+  const handleEscapeOrEnter = useCallback(
     (e: KeyboardEvent) => {
-      if (withEscape && e.key === "Escape") handler();
-      if (withEnter && e.key === "Enter") handler();
+      if (
+        (withEscape && e.key === "Escape") ||
+        (withEnter && e.key === "Enter")
+      ) {
+        handler();
+      }
     },
     [handler, withEnter, withEscape]
   );
 
   useEffect(() => {
     if (shouldRun) {
-      document.addEventListener("keydown", handleEscape);
-      return () => document.removeEventListener("keydown", handleEscape);
+      document.addEventListener("keydown", handleEscapeOrEnter);
+      return () => document.removeEventListener("keydown", handleEscapeOrEnter);
     }
-    return () => {};
-  }, [handleEscape, shouldRun, withEscape]);
+  }, [handleEscapeOrEnter, shouldRun, withEscape]);
 };
 
 export default useOutsideClickListener;

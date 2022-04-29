@@ -1,12 +1,3 @@
-export enum MODAL_TYPE {
-  // see https://www.nngroup.com/articles/popups/ for further reference on modal types
-  MODAL_LIGHTBOX = "modal-lightbox", // includes lightbox and you can't interact with the background
-  MODAL_NON_LIGHTBOX = "modal-non-lightbox", // no lightbox and you can't interact with the background
-  NON_MODAL_NON_LIGHTBOX = "non-modal-non-lightbox", // no lightbox and can interact with the background
-  NON_MODAL_LIGHTBOX = "non-modal-lightbox", // includes lightbox and you can interact with the background
-  TOOL_TIP = "non-modal-non-lightbox",
-}
-
 export enum BLOCK_TYPES {
   UNSTYLED = "unstyled",
   HEADER_ONE = "header-one",

@@ -12,25 +12,24 @@ import {
   SelectionState,
 } from "draft-js";
 import { List, Map } from "immutable";
-import { reduce } from "lodash";
 import { TEXT_STYLES } from "../../definitions";
 
-export function isSoftNewlineEvent(e: any) {
+export const isSoftNewlineEvent = (e: any) => {
   return (
     e.key === "Enter" &&
     (e.getModifierState("Shift") ||
       e.getModifierState("Alt") ||
       e.getModifierState("Control"))
   );
-}
+};
 
 // Function to get data associated with current block
-export function getCurrentBlock(editorState: EditorState) {
+export const getCurrentBlock = (editorState: EditorState) => {
   const selectionState = editorState.getSelection();
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(selectionState.getStartKey());
   return block;
-}
+};
 
 // Function to return the whole block editor state, i.e. the editor state
 // associated with all the elements in a block
@@ -74,21 +73,19 @@ export const removeSpecificBlockStyle = (
     editorState.getCurrentContent()
   );
 
-  if (contentWithoutStyles) {
-    return EditorState.push(
-      editorState,
-      contentWithoutStyles,
-      "change-inline-style"
-    );
-  }
+  return EditorState.push(
+    editorState,
+    contentWithoutStyles!,
+    "change-inline-style"
+  );
 };
 
 // Function used to add new block after a specified block (using block key to identify the block)
-export function addNewBlockAt(
+export const addNewBlockAt = (
   editorState: EditorState,
   pivotBlockKey: string,
   newBlockType = "unstyled"
-) {
+) => {
   const content = editorState.getCurrentContent();
   const blockMap = content.getBlockMap();
   const block = blockMap.get(pivotBlockKey);
@@ -140,7 +137,7 @@ export function addNewBlockAt(
   });
 
   return EditorState.push(editorState, newContent, "split-block");
-}
+};
 
 // Function used to remove a block using its key
 export const removeBlock = (
